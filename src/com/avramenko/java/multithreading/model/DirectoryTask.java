@@ -40,6 +40,7 @@ public class DirectoryTask implements Callable<Boolean> {
             }
         } else {
             System.err.println(this.directory.getAbsoluteFile() + " is not directory");
+
         }
         for (File directory: directories) {
             ExecutorService executorService = Executors.newSingleThreadExecutor();

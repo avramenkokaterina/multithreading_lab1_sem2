@@ -1,7 +1,5 @@
 package com.avramenko.java.multithreading.view;
 
-import com.avramenko.java.multithreading.model.ResultString;
-
 import java.util.Scanner;
 
 public class View {
@@ -11,10 +9,10 @@ public class View {
     public void printMessage(Messages messages) {
         switch (messages) {
             case SHOW_FIRST_MESSAGE:
-                System.out.println("Hello and welcome! I'm gonna show you how multithreading works./n");
+                System.out.println("Hello and welcome! I'm gonna show you how multithreading works.");
                 break;
             case ENTER_DIR:
-                System.out.println("Please, enter name of a directory: ");
+                System.out.println("Please, enter absolute path to directory: ");
                 break;
             case ENTER_LETTER:
                 System.out.println("Please, enter letter: ");
@@ -39,9 +37,4 @@ public class View {
         return string;
     }
 
-    public void printResult(ResultString[] resultStrings){
-        for (ResultString resultString: resultStrings){
-            System.out.println(resultString);
-        }
-    }
 }

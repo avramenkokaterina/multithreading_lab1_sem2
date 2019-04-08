@@ -46,6 +46,7 @@ public class Controller {
     private String checkDirName(View view){
         view.printMessage(Messages.ENTER_DIR);
         dirName = view.readString();
+
         return dirName;
     }
 
