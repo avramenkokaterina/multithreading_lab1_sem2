@@ -11,9 +11,7 @@ public class Controller {
 
     private String dirName;
     private String letter;
-    private Validator validator;
-    private FilesSearcher filesSearcher;
-
+    private Validator validator = new Validator();
 
     public void startWorking() {
         View view = new View();
@@ -28,6 +26,7 @@ public class Controller {
                     break;
                 case ENTER_DATA:
                     activities = getData(view);
+                    model.startWork(this.dirName, this.letter);
                     break;
             }
         }
@@ -41,24 +40,12 @@ public class Controller {
     private Activities getData(View view){
         dirName = checkDirName(view);
         letter = checkLetter(view);
-        filesSearcher.startSearch(dirName);
-
         return Activities.SEARCH_TXT;
     }
 
     private String checkDirName(View view){
         view.printMessage(Messages.ENTER_DIR);
         dirName = view.readString();
-        do {
-            try {
-                if (!validator.checkDirectoryName(dirName).isEmpty()) {
-                    throw new InvalidInputException(validator.checkDirectoryName(dirName));
-                }
-            } catch (InvalidInputException iie) {
-                System.out.println(iie.getMessage());
-                dirName = view.readString();
-            }
-        } while (!validator.checkDirectoryName(dirName).isEmpty());
         return dirName;
     }
 

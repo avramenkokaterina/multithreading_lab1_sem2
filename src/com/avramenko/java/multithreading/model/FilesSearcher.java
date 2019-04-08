@@ -1,4 +1,4 @@
-package com.avramenko.java.multithreading.controller;
+package com.avramenko.java.multithreading.model;
 
 import java.io.File;
 import java.util.ArrayList;
