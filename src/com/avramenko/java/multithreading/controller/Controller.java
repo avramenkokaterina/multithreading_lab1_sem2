@@ -7,6 +7,8 @@ import com.avramenko.java.multithreading.view.Activities;
 import com.avramenko.java.multithreading.view.Messages;
 import com.avramenko.java.multithreading.view.View;
 
+import java.io.File;
+
 public class Controller {
 
     private String dirName;
@@ -46,7 +48,11 @@ public class Controller {
     private String checkDirName(View view){
         view.printMessage(Messages.ENTER_DIR);
         dirName = view.readString();
-
+        while (!(new File(dirName).isDirectory())){
+            System.err.println(new File(dirName).getAbsoluteFile() + " is not directory");
+            view.printMessage(Messages.ENTER_DIR);
+            dirName = view.readString();
+        }
         return dirName;
     }
 

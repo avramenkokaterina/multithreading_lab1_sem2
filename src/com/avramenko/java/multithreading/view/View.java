@@ -17,15 +17,6 @@ public class View {
             case ENTER_LETTER:
                 System.out.println("Please, enter letter: ");
                 break;
-            case NO_RESULTS:
-                System.out.println("No results.");
-                break;
-            case SOMETHING_WRONG:
-                System.out.println("Sorry, something goes wrong...");
-                break;
-            case SUCCESSFUL:
-                System.out.println("Successful!");
-                break;
             default:
                 break;
         }
@@ -36,5 +27,4 @@ public class View {
         String string = new String(scan.nextLine());
         return string;
     }
-
 }

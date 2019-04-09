@@ -3,7 +3,6 @@ package com.avramenko.java.multithreading.model;
 import com.avramenko.java.multithreading.filesWork.FileUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,25 +27,23 @@ public class DirectoryTask implements Callable<Boolean> {
     public Boolean call() {
         List<File> directories = new ArrayList<>();
         List<File> textFiles = new ArrayList<>();
-        if (this.directory.isDirectory()) {
-            if (this.directory.canRead()) {
-                for (File temp : Objects.requireNonNull(this.directory.listFiles())) {
-                    if (temp.isDirectory() && temp.canRead()) {
-                        directories.add(temp);
-                    } else if(temp.getName().contains(".txt")) {
-                        textFiles.add(temp);
-                    }
+
+        if (this.directory.canRead()) {
+            for (File temp : Objects.requireNonNull(this.directory.listFiles())) {
+                if (temp.isDirectory() && temp.canRead()) {
+                    directories.add(temp);
+                } else if (temp.getName().contains(".txt")) {
+                    textFiles.add(temp);
                 }
             }
-        } else {
-            System.err.println(this.directory.getAbsoluteFile() + " is not directory");
-
         }
-        for (File directory: directories) {
+
+        for (File directory : directories) {
             ExecutorService executorService = Executors.newSingleThreadExecutor();
             Future future = executorService.submit(new DirectoryTask(directory, matches));
 //            executorService.shutdown();
         }
+
         String filesMatches = this.getFilesMatches(textFiles, this.matches);
         boolean isSuccess = false;
         if (filesMatches != null || filesMatches.length() > 0) {
@@ -63,7 +60,7 @@ public class DirectoryTask implements Callable<Boolean> {
             return null;
         }
         StringBuilder result = new StringBuilder();
-        for (File file: files) {
+        for (File file : files) {
             int countMatches = calculateMatchesInFile(file, matches);
             if (countMatches > 0) {
                 result.append(file.getName());
